@@ -1,0 +1,40 @@
+# Binaries
+voltig
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Build output
+dist/
+build/
+
+# Go vendor directory
+vendor/
+
+# IDE/editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test output
+*.out
+coverage*
+
+# Logs
+*.log
+
+# Dependency files
+go.sum
+
+# Local config
+.env
+
+# Misc
+*.local
+*.bak

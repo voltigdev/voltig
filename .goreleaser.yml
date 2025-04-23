@@ -1,0 +1,52 @@
+# GoReleaser configuration file for voltig-cli
+# See https://goreleaser.com/customization/ for more options
+version: 2
+project_name: voltig
+
+dist: dist
+
+builds:
+  - main: ./main.go
+    binary: voltig
+    goos:
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - '-s -w -X main.version={{.Version}}'
+
+archives:
+  - name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    files:
+      - LICENSE
+      - README.md
+
+checksum:
+  name_template: "checksums.txt"
+
+release:
+  github:
+    owner: voltigdev
+    name: voltig-cli
+
+changelog:
+  sort: desc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+
+# Homebrew
+brew:
+  name: voltig
+  url: https://github.voltigdev.com/voltig-cli/main/releases/download/{{. Tag}}/voltig_{{. Tag}}_{{. Os}}_{{. Arch}}.tar.gz
+  
+  # Homebrew tap
+  tap: voltigdev/voltig
+  
+  # Homebrew formula
+  formula:
+    name: voltig
+    url: https://github.com/voltigdev/voltig-cli
+  

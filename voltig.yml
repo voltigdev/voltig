@@ -1,0 +1,59 @@
+### EXAMPLE voltig.yml
+
+# Package configuration
+packages: 
+    - name: ["node", "rust"]
+      version: latest
+      manager: brew
+    - name: "python3"
+      version: latest
+      manager: brew
+    
+    
+
+# Custom commands
+commands:
+  # Run your own commands
+  add:
+    summary: Install voltig-cli
+    command: |
+      go build -o voltig .
+      echo "Install complete: ./voltig"
+      mv ./voltig $HOME/go/bin/
+      echo "Added to $HOME/go/bin"
+      go install
+      echo "Installed to $HOME/go/bin"
+  build:
+    summary: Build the voltig Go project
+    command: |
+      go build -o voltig .
+      echo "Build complete: ./voltig"
+  test:
+    summary: Test the voltig Go project
+    command: |
+      go test ./...
+    
+  # Examples of running script files
+  setup-dev:
+    summary: Run the development environment setup script
+    script: ./scripts/setup-dev.sh
+    
+  deploy:
+    summary: Deploy with custom arguments
+    script: ./scripts/deploy.sh
+    args:
+      - "--env=production"
+      - "--verbose"
+    
+  database:
+    summary: Run database operations with environment variables
+    script: ./scripts/db-operations.sh
+    workDir: ./database
+    environment:
+      - "DB_USER=admin"
+      - "DB_PASSWORD=secret"
+      
+  custom-shell:
+    summary: Run a script with a specific shell
+    script: ./scripts/special.sh
+    shell: /bin/zsh
