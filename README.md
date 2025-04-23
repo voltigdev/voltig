@@ -21,6 +21,14 @@ A modern, cross-platform Go-based CLI tool for managing system packages with a u
 brew install voltig
 ```
 
+### 🌀 One-liner (Any Unix)
+
+Install the latest release directly (requires curl, tar):
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/voltigdev/voltig/main/scripts/install.sh | bash 
+```
+
 ### Other option:
 
 1. **Clone the repository**

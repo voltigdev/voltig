@@ -11,9 +11,10 @@ import (
 )
 
 var removeCmd = &cobra.Command{
-	Use:   "remove [pkg_name]...",
-	Short: "Remove one or more packages",
-	Args:  cobra.MinimumNArgs(1),
+	Use:     "remove [pkg_name]...",
+	Aliases: []string{"rm"},
+	Short:   "Remove one or more packages",
+	Args:    cobra.MinimumNArgs(1),
 	Run: func(_ *cobra.Command, args []string) {
 		cfg, err := config.LoadConfig(configFile)
 		if err != nil {

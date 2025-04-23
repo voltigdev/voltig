@@ -11,19 +11,14 @@ import (
 	"github.com/charmbracelet/log"
 )
 
+// Note: version, commit, and date variables are injected via -ldflags at build time for the version command.
 func main() {
 	// Configure logger based on environment
-	verbose := os.Getenv("VOLTIG_VERBOSE") == "true"
+	verbose := os.Getenv("VOLTIG_VERBOSE") == "false"
 	if verbose {
 		logger.SetLevel(log.DebugLevel)
 		logger.Debug("Debug logging enabled")
 	}
-
-	// Log startup information
-	logger.Info("Starting Voltig CLI",
-		"version", "0.1.0",
-		"verbose", verbose,
-	)
 
 	// Execute the root command
 	cmd.Execute()

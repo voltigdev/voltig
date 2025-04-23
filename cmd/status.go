@@ -11,9 +11,10 @@ import (
 )
 
 var statusCmd = &cobra.Command{
-	Use:   "status",
-	Short: "Show installation status of all packages",
-	Args:  cobra.NoArgs,
+	Use:     "status",
+	Aliases: []string{"st"},
+	Short:   "Show installation status of all packages",
+	Args:    cobra.NoArgs,
 	Run: func(_ *cobra.Command, _ []string) {
 		cfg, err := config.LoadConfig(configFile)
 		if err != nil {
