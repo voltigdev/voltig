@@ -28,7 +28,7 @@ checksum:
 release:
   github:
     owner: voltigdev
-    name: voltig-cli
+    name: voltig
 
 changelog:
   sort: desc
