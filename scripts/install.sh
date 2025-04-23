@@ -95,13 +95,6 @@ else
 fi
 echo
 
-# Section: Test Install
-if command -v "$BINARY" >/dev/null 2>&1; then
-  "$BINARY" --help | head -n 8 || true
-else
-  printf "${RED}Warning:${RESET} $BINARY not found in PATH. Add $INSTALL_DIR to your PATH.\n"
-fi
-
 echo "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
 echo "${BOLD}🎉 Done! Run '${BLUE}voltig --help${RESET}${BOLD}' to get started.${RESET}"
 echo "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
