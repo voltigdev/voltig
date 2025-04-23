@@ -59,10 +59,21 @@ mv voltig "$INSTALL_DIR/$BINARY"
 cd - >/dev/null
 rm -rf "$TMP_DIR"
 
-echo "Installed $BINARY to $INSTALL_DIR/$BINARY"
-echo "Make sure $INSTALL_DIR is in your PATH."
+INSTALLED_PATH="$INSTALL_DIR/$BINARY"
+echo "\n✅ Installed $BINARY to: $INSTALLED_PATH"
 
-# Test install
+# Show which voltig is being used
+WHICH_PATH=$(command -v "$BINARY" 2>/dev/null || true)
+if [ -n "$WHICH_PATH" ]; then
+  echo "🔎 'voltig' found in your PATH at: $WHICH_PATH"
+else
+  echo "⚠️  'voltig' is not currently in your PATH."
+  echo "   To add it, run:"
+  echo "     export PATH=\"$INSTALL_DIR:\$PATH\""
+  echo "   Then restart your shell or run: source ~/.zshrc (or ~/.bashrc)"
+fi
+
+# Test install and show help
 if command -v "$BINARY" >/dev/null 2>&1; then
   "$BINARY" --help || true
 else
