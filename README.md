@@ -15,12 +15,6 @@ A modern, cross-platform Go-based CLI tool for managing system packages with a u
 
 ## 🚀 Installation
 
-### 🍎 MacOS Install
-
-```sh
-brew install voltig
-```
-
 ### 🌀 One-liner (Any Unix)
 
 Install the latest release directly (requires curl, tar):
