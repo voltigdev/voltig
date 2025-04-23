@@ -60,22 +60,48 @@ cd - >/dev/null
 rm -rf "$TMP_DIR"
 
 INSTALLED_PATH="$INSTALL_DIR/$BINARY"
-echo "\n✅ Installed $BINARY to: $INSTALLED_PATH"
 
-# Show which voltig is being used
+# Colors for UX polish
+if command -v tput >/dev/null 2>&1; then
+  BOLD="$(tput bold)"
+  GREEN="$(tput setaf 2)"
+  YELLOW="$(tput setaf 3)"
+  RED="$(tput setaf 1)"
+  BLUE="$(tput setaf 4)"
+  RESET="$(tput sgr0)"
+else
+  BOLD=""
+  GREEN=""
+  YELLOW=""
+  RED=""
+  BLUE=""
+  RESET=""
+fi
+
+# Section: Install Success
+printf "\n${GREEN}✔️  ${BOLD}Voltig installed successfully!${RESET}\n"
+printf "${BOLD}Location:${RESET} %s\n" "$INSTALLED_PATH"
+echo
+
+# Section: PATH Check
 WHICH_PATH=$(command -v "$BINARY" 2>/dev/null || true)
 if [ -n "$WHICH_PATH" ]; then
-  echo "🔎 'voltig' found in your PATH at: $WHICH_PATH"
+  printf "${BLUE}🔎 'voltig' is available in your PATH at:${RESET} %s\n" "$WHICH_PATH"
 else
-  echo "⚠️  'voltig' is not currently in your PATH."
-  echo "   To add it, run:"
-  echo "     export PATH=\"$INSTALL_DIR:\$PATH\""
+  printf "${YELLOW}⚠️  'voltig' is not currently in your PATH.${RESET}\n"
+  echo "   To use 'voltig' from anywhere, add it to your PATH:"
+  printf "   ${BOLD}export PATH=\"%s:\$PATH\"${RESET}\n" "$INSTALL_DIR"
   echo "   Then restart your shell or run: source ~/.zshrc (or ~/.bashrc)"
 fi
+echo
 
-# Test install and show help
+# Section: Test Install
 if command -v "$BINARY" >/dev/null 2>&1; then
-  "$BINARY" --help || true
+  "$BINARY" --help | head -n 8 || true
 else
-  echo "Warning: $BINARY not found in PATH. Add $INSTALL_DIR to your PATH."
+  printf "${RED}Warning:${RESET} $BINARY not found in PATH. Add $INSTALL_DIR to your PATH.\n"
 fi
+
+echo "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
+echo "${BOLD}🎉 Done! Run '${BLUE}voltig --help${RESET}${BOLD}' to get started.${RESET}"
+echo "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
