@@ -36,17 +36,4 @@ changelog:
     exclude:
       - '^docs:'
       - '^test:'
-
-# Homebrew
-brew:
-  name: voltig
-  url: https://github.voltigdev.com/voltig-cli/main/releases/download/{{. Tag}}/voltig_{{. Tag}}_{{. Os}}_{{. Arch}}.tar.gz
-  
-  # Homebrew tap
-  tap: voltigdev/voltig
-  
-  # Homebrew formula
-  formula:
-    name: voltig
-    url: https://github.com/voltigdev/voltig-cli
   
