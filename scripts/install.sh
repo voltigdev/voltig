@@ -6,7 +6,7 @@ REPO="voltigdev/voltig"
 BINARY="voltig"
 
 # Detect latest release
-LATEST_TAG=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" | grep -oP '"tag_name": "\K(.*)(?=")')
+LATEST_TAG=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" | sed -n 's/.*"tag_name": "\([^"]*\)".*/\1/p')
 if [ -z "$LATEST_TAG" ]; then
   echo "Could not determine latest release. Exiting."
   exit 1
@@ -22,18 +22,30 @@ case "$ARCH" in
 esac
 
 # Compose download URL
-ASSET="${BINARY}-${OS}-${ARCH}"
+ASSET="${BINARY}_${LATEST_TAG#v}_${OS}_${ARCH}.tar.gz"
 URL="https://github.com/${REPO}/releases/download/${LATEST_TAG}/${ASSET}"
 
 # Download to temp location
-TMP=$(mktemp)
-echo "Downloading ${BINARY} (${LATEST_TAG}) for ${OS}/${ARCH}..."
-if ! curl -fsSL "$URL" -o "$TMP"; then
-  echo "Failed to download binary from $URL"
+TMP_DIR=$(mktemp -d)
+ARCHIVE_PATH="$TMP_DIR/$ASSET"
+echo "Downloading ${ASSET} (${LATEST_TAG}) for ${OS}/${ARCH}..."
+if ! curl -fsSL "$URL" -o "$ARCHIVE_PATH"; then
+  echo "Failed to download archive from $URL"
+  rm -rf "$TMP_DIR"
   exit 1
 fi
 
-chmod +x "$TMP"
+# Extract the archive
+cd "$TMP_DIR"
+tar -xzf "$ARCHIVE_PATH"
+
+# Find the binary (assume it's named voltig)
+if [ ! -f "voltig" ]; then
+  echo "voltig binary not found in archive."
+  rm -rf "$TMP_DIR"
+  exit 1
+fi
+chmod +x voltig
 
 # Install to /usr/local/bin or ~/.local/bin
 INSTALL_DIR="/usr/local/bin"
@@ -43,7 +55,9 @@ if [ ! -w "$INSTALL_DIR" ]; then
   echo "No write access to /usr/local/bin, installing to $INSTALL_DIR"
 fi
 
-mv "$TMP" "$INSTALL_DIR/$BINARY"
+mv voltig "$INSTALL_DIR/$BINARY"
+cd - >/dev/null
+rm -rf "$TMP_DIR"
 
 echo "Installed $BINARY to $INSTALL_DIR/$BINARY"
 echo "Make sure $INSTALL_DIR is in your PATH."

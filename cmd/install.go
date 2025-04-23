@@ -12,9 +12,10 @@ import (
 )
 
 var installCmd = &cobra.Command{
-	Use:   "install [pkg_name...]",
-	Short: "Install specific or all packages",
-	Args:  cobra.MinimumNArgs(0),
+	Use:     "install [pkg_name...]",
+	Aliases: []string{"i"},
+	Short:   "Install specific or all packages",
+	Args:    cobra.MinimumNArgs(0),
 	Run: func(_ *cobra.Command, args []string) {
 		cfg, err := config.LoadConfig(configFile)
 		if err != nil {

@@ -14,7 +14,11 @@ builds:
       - amd64
       - arm64
     ldflags:
-      - '-s -w -X main.version={{.Version}}'
+      - "-s -w
+        -X 'voltig/cmd.version={{.Version}}'
+        -X 'voltig/cmd.commit={{.ShortCommit}}'
+        -X 'voltig/cmd.date={{.Date}}'"
+
 
 archives:
   - name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"

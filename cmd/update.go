@@ -11,6 +11,7 @@ import (
 )
 
 var updateCmd = &cobra.Command{
+	Aliases: []string{"u"},
 	Use:   "update [pkg_name...]",
 	Short: "Update specific or all packages",
 	Args:  cobra.ArbitraryArgs,
