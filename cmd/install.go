@@ -1,7 +1,10 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
+	"os/exec"
+	"runtime"
 
 	"voltig/config"
 	"voltig/internal/manager"
@@ -17,6 +20,13 @@ var installCmd = &cobra.Command{
 	Short:   "Install specific or all packages",
 	Args:    cobra.MinimumNArgs(0),
 	Run: func(_ *cobra.Command, args []string) {
+		fmt.Println(HeaderStyle.Render("🔧 Voltig: Installing Packages"))
+
+		if err := ensureHomebrew(); err != nil {
+			fmt.Println(ErrorStyle.Render("Failed to install Homebrew:", err.Error()))
+			os.Exit(1)
+		}
+
 		cfg, err := config.LoadConfig(configFile)
 		if err != nil {
 			logger.Error("Failed to load config", "error", err)
@@ -96,4 +106,27 @@ var installCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(installCmd)
+}
+
+func ensureHomebrew() error {
+	_, err := exec.LookPath("brew")
+	if err == nil {
+		return nil
+	}
+	fmt.Println(HeaderStyle.Render("Homebrew not found. Installing Homebrew..."))
+	if runtime.GOOS == "darwin" {
+		cmd := exec.Command("/bin/bash", "-c", "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")
+		cmd.Stdin = os.Stdin
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		return cmd.Run()
+	} else if runtime.GOOS == "linux" {
+		cmd := exec.Command("/bin/bash", "-c", "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")
+		cmd.Stdin = os.Stdin
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		return cmd.Run()
+	} else {
+		return fmt.Errorf("automatic Homebrew installation is not supported on this OS")
+	}
 }
