@@ -5,6 +5,7 @@ A modern, cross-platform Go-based CLI tool for managing system packages with a u
 ---
 
 ## ✨ Features
+
 - 🍺 **Homebrew Automation**: Install, remove, update, and check status of Homebrew packages via CLI(Will be extended to support other package managers in the future)
 - 📝 **YAML Configuration**: Manage multiple packages and custom commands in `voltig.yml`.
 - 🔍 **Automatic Config Discovery**: Voltig finds `voltig.yml` in your current or parent directories.
@@ -20,7 +21,14 @@ A modern, cross-platform Go-based CLI tool for managing system packages with a u
 Install the latest release directly (requires curl, tar):
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/voltigdev/voltig/main/scripts/install.sh | bash 
+curl -fsSL https://raw.githubusercontent.com/voltigdev/voltig/main/scripts/install.sh | bash
+```
+
+### 🍺 Homebrew Installation(macOS)
+
+```sh
+brew tap voltigdev/voltig
+brew install voltig
 ```
 
 ### Other option:
@@ -40,9 +48,11 @@ curl -fsSL https://raw.githubusercontent.com/voltigdev/voltig/main/scripts/insta
    mv ./voltig $HOME/go/bin/
    # Make sure $HOME/go/bin is in your PATH
    ```
+
 ---
 
 ## 🗂️ Configuration Discovery
+
 - Voltig will automatically find `voltig.yml` in your current directory or any parent directory.
 - You can run Voltig commands from any subfolder in your project tree.
 
@@ -72,21 +82,22 @@ packages:
 ```
 
 **Field Reference:**
-- `name`:  
-  - *Type*: string or array of strings  
-  - *Description*: The name(s) of the package(s). If multiple, use YAML array syntax.
-- `version`:  
-  - *Type*: string  
-  - *Description*: The version to install (e.g., `latest`, `1.0.0`). Optional.
-- `manager`:  
-  - *Type*: string  
-  - *Description*: The package manager to use (e.g., `brew`).
-- `optional`:  
-  - *Type*: boolean  
-  - *Description*: If true, package is optional. Default is false.
-- `dependencies`:  
-  - *Type*: array of strings  
-  - *Description*: List of package dependencies. Optional.
+
+- `name`:
+  - _Type_: string or array of strings
+  - _Description_: The name(s) of the package(s). If multiple, use YAML array syntax.
+- `version`:
+  - _Type_: string
+  - _Description_: The version to install (e.g., `latest`, `1.0.0`). Optional.
+- `manager`:
+  - _Type_: string
+  - _Description_: The package manager to use (e.g., `brew`).
+- `optional`:
+  - _Type_: boolean
+  - _Description_: If true, package is optional. Default is false.
+- `dependencies`:
+  - _Type_: array of strings
+  - _Description_: List of package dependencies. Optional.
 
 #### Examples
 
@@ -132,6 +143,7 @@ commands:
 ```
 
 **Field Reference:**
+
 - `summary`: Short description of the command.
 - `command`: Shell command to execute.
 - `script`: Path to a script file to run.
@@ -151,41 +163,47 @@ commands:
 ---
 
 **Best Practices:**
+
 - Group related packages using the array syntax for clarity.
 - Use descriptive summaries for commands.
 - Keep your configuration DRY and organized.
 
 ---
 
-
 ## ⚡️ Example Usage
 
 **Install all packages from voltig.yml:**
+
 ```sh
 voltig install
 ```
 
 **Remove all packages from voltig.yml:**
+
 ```sh
 voltig remove
 ```
 
 **Update all packages from voltig.yml:**
+
 ```sh
 voltig update
 ```
 
 **Check status of all packages:**
+
 ```sh
 voltig status
 ```
 
 **Install a single package:**
+
 ```sh
 voltig install zig
 ```
 
 **Remove a single package:**
+
 ```sh
 voltig remove gleam
 ```
@@ -193,6 +211,7 @@ voltig remove gleam
 ---
 
 ## 🗃️ Directory Structure
+
 ```
 ├── 📦 cmd/            # Command implementations
 ├── 📝 config/         # Configuration loader & search logic
@@ -204,4 +223,5 @@ voltig remove gleam
 ```
 
 ## License
+
 MIT
