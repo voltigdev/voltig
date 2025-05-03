@@ -3,6 +3,10 @@
 version: 2
 project_name: voltig
 
+before:
+  hooks:
+    - go mod tidy
+
 dist: dist
 
 builds:
@@ -59,4 +63,4 @@ brews:
       owner: voltigdev
       name: homebrew-voltig
       branch: main
-      token: "{{ .Env.GITHUB_TOKEN }}"
+      token: "{{ .Env.GH_TOKEN }}"
