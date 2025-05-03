@@ -19,7 +19,6 @@ builds:
         -X 'voltig/cmd.commit={{.ShortCommit}}'
         -X 'voltig/cmd.date={{.Date}}'"
 
-
 archives:
   - name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     files:
@@ -38,6 +37,20 @@ changelog:
   sort: desc
   filters:
     exclude:
-      - '^docs:'
-      - '^test:'
-  
+      - "^docs:"
+      - "^test:"
+
+brew:
+  name: voltig
+  github:
+    owner: voltigdev
+    name: homebrew-tap
+  description: "Voltig CLI - Cross-platform package manager and dev environment tool."
+  homepage: "https://github.com/voltigdev/voltig"
+  install: |
+    bin.install "voltig"
+  caveats: |
+    To get started, run:
+      voltig --help
+  test: |
+    voltig --version
