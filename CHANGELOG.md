@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/voltigdev/voltig/compare/v1.0.0...v1.1.0) (2025-05-03)
+
+
+### Features
+
+* almost done ([217b735](https://github.com/voltigdev/voltig/commit/217b7353b37b3b284915d18b4632f5954d223893))
+
 # 1.0.0 (2025-05-03)
 
 
