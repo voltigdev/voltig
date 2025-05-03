@@ -57,6 +57,6 @@ brews:
       voltig --version
     repository:
       owner: voltigdev
-      name: homebrew-tap
+      name: homebrew-voltig
       branch: main
       token: "{{ .Env.GITHUB_TOKEN }}"
