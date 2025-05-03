@@ -63,4 +63,4 @@ brews:
       owner: voltigdev
       name: homebrew-voltig
       branch: main
-      token: "{{ .Env.GH_TOKEN }}"
+      token: "{{ .Env.GITHUB_TOKEN }}"
