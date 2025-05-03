@@ -41,16 +41,13 @@ changelog:
       - "^test:"
 
 brews:
-  - name: voltig
-    github:
-      owner: voltigdev
-      name: homebrew-tap
-    description: "Voltig CLI - Cross-platform package manager and dev environment tool."
-    homepage: "https://github.com/voltigdev/voltig"
-    install: |
-      bin.install "voltig"
-    caveats: |
-      To get started, run:
-        voltig --help
-    test: |
-      voltig --version
+  name: voltig
+  description: "Voltig CLI - Cross-platform package manager and dev environment tool."
+  homepage: "https://github.com/voltigdev/voltig"
+  install: |
+    bin.install "voltig"
+  repository:
+    owner: voltigdev
+    name: voltig
+    branch: main
+    token: ${{ secrets.GITHUB_TOKEN }}
