@@ -59,4 +59,4 @@ brews:
       owner: voltigdev
       name: homebrew-tap
       branch: main
-      token: ${{ secrets.GITHUB_TOKEN }}
+      token: "{{ .Env.GITHUB_TOKEN }}"
