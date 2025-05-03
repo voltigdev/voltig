@@ -41,22 +41,22 @@ changelog:
       - "^test:"
 
 brews:
-  name: voltig
-  commit_author:
-    name: Voltig
-    email: voltig@voltig.dev
-  commit_msg_template: "chore: update to {{ .Version }}"
-  directory: homebrew-tap
-  description: "Voltig CLI - Cross-platform package manager and dev environment tool."
-  install: |
-    bin.install "voltig"
-  caveats: |
-    To get started, run:
-      voltig --help
-  test: |
-    voltig --version
-  repository:
-    owner: voltigdev
-    name: homebrew-tap
-    branch: main
-    token: ${{ secrets.GITHUB_TOKEN }}
+  - name: voltig
+    commit_author:
+      name: Voltig
+      email: voltig@voltig.dev
+    commit_msg_template: "chore: update to {{ .Version }}"
+    directory: homebrew-tap
+    description: "Voltig CLI - Cross-platform package manager and dev environment tool."
+    install: |
+      bin.install "voltig"
+    caveats: |
+      To get started, run:
+        voltig --help
+    test: |
+      voltig --version
+    repository:
+      owner: voltigdev
+      name: homebrew-tap
+      branch: main
+      token: ${{ secrets.GITHUB_TOKEN }}
