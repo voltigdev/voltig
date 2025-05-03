@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/voltigdev/voltig/compare/v1.1.0...v1.2.0) (2025-05-03)
+
+
+### Features
+
+* almost messed up the folder ([5c97c74](https://github.com/voltigdev/voltig/commit/5c97c74c1db82d5beeae1261605c1e3049165f32))
+
 # [1.1.0](https://github.com/voltigdev/voltig/compare/v1.0.0...v1.1.0) (2025-05-03)
 
 
