@@ -42,12 +42,21 @@ changelog:
 
 brews:
   name: voltig
+  commit_author:
+    name: Voltig
+    email: voltig@voltig.dev
+  commit_msg_template: "chore: update to {{ .Version }}"
+  directory: homebrew-tap
   description: "Voltig CLI - Cross-platform package manager and dev environment tool."
-  homepage: "https://github.com/voltigdev/voltig"
   install: |
     bin.install "voltig"
+  caveats: |
+    To get started, run:
+      voltig --help
+  test: |
+    voltig --version
   repository:
     owner: voltigdev
-    name: voltig
+    name: homebrew-tap
     branch: main
     token: ${{ secrets.GITHUB_TOKEN }}
