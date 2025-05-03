@@ -6,11 +6,10 @@ linters:
   settings:
     revive:
       rules:
-       - name: unused-parameter
-         arguments: 
-           - allow-regex: "(cmd|args|_args|_cmd|pkg|outputFn|)"
+        - name: unused-parameter
+          arguments:
+            - allow-regex: "(cmd|args|_args|_cmd|pkg|outputFn|)"
   enable:
-    - govet
     - errcheck
     - staticcheck
     - unused
@@ -31,6 +30,6 @@ output:
   format: colored-line-number
   print-issued-lines: true
 
-run: 
+run:
   timeout: 3m
 # You can add custom excludes or configure per-linter options below
