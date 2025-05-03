@@ -50,7 +50,7 @@ brews:
       name: Voltig
       email: voltig@voltig.dev
     commit_msg_template: "chore: update to {{ .Version }}"
-    directory: homebrew-tap
+    directory: Formula
     description: "Voltig CLI - Cross-platform package manager and dev environment tool."
     install: |
       bin.install "voltig"
